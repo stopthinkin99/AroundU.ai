@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AroundU Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-black text-white font_urbanist">
+
+  <!-- Sticky Navbar -->
+  <nav class="sticky top-0 z-50 bg-black border-b border-gray-800">
+    <div class="mainContainer px-4 sm:px-6 lg:px-12 py-4 flex justify-between items-center">
+      <!-- Logo -->
+      <div class="flex items-center w-28 sm:w-40 font-semibold">
+        <img src="./images/arvr-nav-logo.svg" alt="AroundU Logo">
+      </div>
+
+
+      <!-- Update Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#heroSection" class="text-white font-medium nav-link" data-section="heroSection">Home</a>
+
+        <!-- Products Dropdown -->
+        <div class="relative group">
+          <button class="text-gray-400 hover:text-white transition flex items-center nav-link" data-section="">
+            Products
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            <a href="#SpatialNav" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 nav-link"
+              onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })">SpatialNav</a>
+            <a href="#Alphabuddy" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 nav-link"
+                     onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
+>Alphabuddy</a>
+          </div>
+        </div>
+
+        <a href="#whoWeAre" class="text-gray-400 hover:text-white transition nav-link" data-section="whoWeAre">About
+          Us</a>
+        <a href="#vision" class="text-gray-400 hover:text-white transition nav-link" data-section="vision">Vision</a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <!-- Update Desktop Contact Button -->
+      <div class="hidden md:flex items-center space-x-8">
+        <button onclick="scrollToSection('arTransformation')"
+          class="border border-gray-500 rounded-full px-5 py-2 hover:bg-white hover:text-black transition whitespace-nowrap nav-link"
+          data-section="arTransformation">
+          Contact Us
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+        <img src="./images/menu-icon.svg" alt="Menu" class="w-6 h-6">
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-black z-40 transform -translate-x-full md:hidden w-[70%]">
+      <div class="flex flex-col h-full items-start p-6 space-y-8">
+
+        <div class="flex justify-between w-full">
+
+          <!-- Logo -->
+          <div class="flex items-center w-28 sm:w-40 font-semibold">
+            <img src="./images/arvr-nav-logo.svg" alt="AroundU Logo">
+          </div>
+
+          <button id="close-menu" class="text-white focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation Links -->
+        <!-- Mobile Navigation Links -->
+        <div class="flex flex-col space-y-6 text-sm sm:text-base">
+          <a href="#heroSection" class="text-white font-medium border-l-4 border-blue-500 pl-4 py-2 nav-link"
+            data-section="heroSection">Home</a>
+
+          <!-- Products Dropdown Mobile -->
+          <div class="mobile-dropdown">
+            <button
+              class="flex items-center justify-between w-full text-gray-400 hover:text-white transition pl-4 py-2 nav-link"
+              data-section="">
+              Products
+              <svg class="w-4 h-4 transform transition-transform duration-300" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="mobile-dropdown-content hidden pl-6">
+              <a href="#SpatialNav" class="block py-2 text-gray-400 hover:text-white nav-link"
+                onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })">SpatialNav</a>
+              <a href="#Alphabuddy" class="block py-2 text-gray-400 hover:text-white nav-link"
+                       onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
+>Alphabuddy</a>
+            </div>
+          </div>
+
+          <a href="#whoWeAre" class="text-gray-400 hover:text-white transition pl-4 py-2 nav-link"
+            data-section="whoWeAre">About Us</a>
+          <a href="#vision" class="text-gray-400 hover:text-white transition pl-4 py-2 nav-link"
+            data-section="vision">Vision</a>
+          <a href="#arTransformation"
+            class="border border-gray-500 whitespace-nowrap max-w-[140px] rounded-full px-5 py-2 hover:bg-white hover:text-black transition mx-auto nav-link"
+            data-section="arTransformation">Contact Us</a>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- HERO SECTION -->
+
+  <section id="heroSection"
+    class="text-center px-4 md:px-20 pt-2 sm:pt-10 relative bg-cover bg-center border-b border-[#191919] pb-16 md:pb-24"
+    style="background-image: url('./images/Ellipse.png');">
+    <div class="relative mt-8 flex justify-center items-center">
+      <!-- Floating Images Left -->
+      <img src="./images/Group(31).png"
+        class="hidden sm:block absolute left-4 xl:left-64 -bottom-4 w-12 md:w-20 h-12 md:h-20" />
+      <img src="./images/Group(32).png" class="absolute -left-10 -top-4 w-18 h-18 transform translate-y-1/2 " />
+
+      <!-- Hero text Centered -->
+      <div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold">
+          <p class="leading-[3rem] md:leading-[3.5rem] lg:leading-[4.5rem]">Next-Gen <span
+              style="background-image: linear-gradient(to right, #1681e6, #902dff);"
+              class="bg-clip-text text-transparent">Augmented</span> Reality<br class="hidden lg:block" />
+            for Real-World Impact</p>
+        </h1>
+        <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg sm:text-xl">
+          Experience the future with next-gen Augmented Reality built to solve real-world challenges and drive
+          meaningful change.
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex gap-4 justify-center mt-6">
+          <!-- Invite Link Button -->
+          <button class="text-white font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+            Invite Link
+          </button>
+
+          <!-- Call Setup Button -->
+          <button class="text-white font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+            Call Setup
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Floating Images Right -->
+      <img src="./images/Group(30).png"
+        class="absolute right-0 sm:right-4 top-14 sm:top-12 w-16 h-16 sm:w-18 sm:h-18 md:w-24 md:h-24 transform translate-y-1/2" />
+    </div>
+
+
+    <!-- Hero Image with small side images -->
+    <div class="relative mt-8 flex justify-center items-center">
+
+      <!-- Hero Image Centered -->
+      <div class="bg-black p-4 rounded-xl shadow-lg z-10 ">
+        <img src="./images/herobgg.png" alt="Hero" class="mx-auto w-full mb-12 sm:mb-0" />
+      </div>
+
+
+    </div>
+
+    <!-- Cards -->
+    <div class="cardss -mt-64 sm:-mt-48 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto relative z-10">
+      <!-- Card 1 -->
+      <div
+      onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })"
+        class="card cursor-pointer bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 shadow-lg flex flex-col gap-4 transition">
+        <div class="flex justify-between items-center w-full">
+          <img src="./images/sp.png" class="w-10" />
+          <div class="bg-blue-500 p-2 rounded-full arrow-icon">
+            <img src="./images/arw.png" class="h-6 w-6" alt="">
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-left">SpatialNav<sup>TM <span
+                class="border border-[#364ccf] py-1.5 px-2 rounded-full ml-1.5 font-thin bg-[#26285b]">Built in
+                collaboration with Snap AR</span></sup></h3>
+          <p class="text-sm text-gray-300 mt-2 text-left">
+            Navigate complex spaces with ease. AR-powered spatial navigation overlays real-time directions,
+            landmarks,
+            and contextual cues into your environment.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+             onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
+
+        class="card cursor-pointer bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 shadow-lg flex flex-col gap-4 transition">
+        <div class="flex justify-between items-center w-full">
+          <img src="./images/alpha.png" class="w-10" />
+          <div class="bg-blue-500 p-2 rounded-full arrow-icon">
+            <img src="./images/arw.png" class="h-6 w-6" alt="">
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-left">Alphabuddy</h3>
+          <p class="text-sm text-gray-300 mt-2 text-left">
+            Let Alpha Buddy guide you. With real-time AR overlays, effortlessly find your way through malls,
+            campuses,
+            airports, or offices. Smart, intuitive, and always one step ahead.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- OUR VISION SECTION -->
+
+  <section id="vision" class="mainContainer bg-black text-white px-6 md:px-12 pt-16 md:pt-20">
+    <div class="flex flex-col justify-between items-start gap-4">
+
+
+      <!-- Eye Icon + Subtitle -->
+      <div class="flex flex-col items-start gap-2">
+        <img src="./images/our-vsn-eye-icon.svg" alt="Eye Icon" class="w-8 h-8" />
+        <span class="text-lg text-gray-300 text-lg sm:text-xl">Our Vision</span>
+      </div>
+
+
+      <div class="flex flex-col md:flex-row justify-between items-start gap-2 sm:gap-10">
+        <!-- Left Section -->
+        <div class="">
+
+          <!-- Bold Heading -->
+          <h2 class="font-bold leading-tight text-gray-100 mb-4 text-3xl md:text-4xl">
+            Augmented reality is the new graphical interface ARoundU helps enterprises bridge the gap between the
+            physical and digital.
+          </h2>
+        </div>
+
+        <!-- Right Section -->
+        <div>
+          <div class="text-gray-400 leading-relaxed text-lg sm:text-xl mb-6">
+            We build AR solutions that move beyond screens and into the real world, from hands-free workflows to spatial
+            customer engagement. Our products redefine how work gets done and how people interact with their
+            environments.
+          </div>
+          <p class="font-semibold leading-relaxed text-lg sm:text-xl">From paper to screens. From screens to spaces.
+            Let’s build that future -together.</p>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- DIVIDER IMAGE -- 1 -->
+
+  <section class="relative top-[-10px] md:top-[-40px] lg:top-[-80px]">
+    <div class="w-[100%] flex justify-center items-center">
+      <img src="./images/vision-divider-img.png" alt="Specs" class="rounded-lg h-auto">
+    </div>
+  </section>
+
+
+
+  <!-- INDUTRY OFFERINGS SECTION -->
+
+  <section id="industryOfferings" class="bg-black pb-16 md:pb-24">
+    <div class="mainContainer mx-auto px-4">
+      <div class="flex justify-center">
+        <!-- Title -->
+        <div class="mb-8 text-center">
+          <p class="text-gray-400 text-sm mb-2 text-lg sm:text-xl">Industry Offerings</p>
+          <h2 class="text-3xl font-semibold text-white text-3xl md:text-4xl">Built for Every Industry That Moves</h2>
+          <p class="text-gray-400 text-sm mt-2 text-lg sm:text-xl">Our AR solutions deliver measurable value across
+            diverse verticals</p>
+        </div>
+      </div>
+
+      <!-- Cards Grid (Replaced Slider) -->
+      <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-6 md:px-12">
+        <!-- Cards will be injected here dynamically -->
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- SPATIAL NAV SECTION -->
+
+  <section id="spatialNavSection" class="mainContainer px-4 sm:px-6 lg:px-12 pb-16 md:pb-24">
+    <!-- Heading -->
+    <div class="mb-10 md:mb-16">
+      <h4 class="text-gray-300 text-lg sm:text-xl font-medium mb-4">SpatialNav<sup>TM</sup></h4>
+      <h1 class="text-3xl md:text-4xl font-semibold mb-4 leading-tight">Built in collaboration with Snap AR</h1>
+      <p class="text-gray-400 text-lg sm:text-xl max-w-2xl">
+        Navigation for Indoor Spaces Using AR
+      </p>
+    </div>
+
+    <!-- Applications & Benefits -->
+    <div class="flex flex-col md:flex-row gap-10 w-full justify-between">
+
+      <!-- Applications -->
+      <div class="md:w-[50%] w-[100%]">
+        <div class="flex flex-col items-start">
+          <h2 class="text-xl md:text-2xl font-semibold mb-1 md:mb-6">Applications</h2>
+          <!-- Single App Item -->
+
+
+          <div>
+            <div class="flex items-center gap-2 justify-center">
+              <div class="flex flex-col items-center text-center">
+                <img src="./images/outlet-mall-icon.svg" alt="Outlets" class="" />
+                <p class="text-base text-gray-300 -mt-3">Outlets, <br> Malls</p>
+              </div>
+              <div class="flex flex-col items-center text-center">
+                <img src="./images/unvrst-icon.svg" alt="University" class="" />
+                <p class="text-base text-gray-300 -mt-3">University Campuses & <br> Academic Institutions</p>
+              </div>
+              <div class="flex flex-col items-center text-center">
+                <img src="./images/business-park-icon.svg" alt="Business" class="" />
+                <p class="text-base text-gray-300 -mt-3">Business Parks & <br> Enterprise Offices</p>
+              </div>
+            </div>
+
+
+            <div class="flex items-center gap-2 justify-center">
+              <div class="flex flex-col items-center text-center">
+                <img src="./images/airports-icon.svg" alt="Airports" class="" />
+                <p class="text-base text-gray-300 -mt-3">Airports, <br>Transport Hubs</p>
+              </div>
+              <div class="flex flex-col items-center text-center">
+                <img src="./images/Museums-Exhibitions-icon.svg" alt="Museums" class="" />
+                <p class="text-base text-gray-300 -mt-3">Museums, Art <br> Galleries & Exhibitions</p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="md:w-[50%] w-[100%] max-w-[500px]">
+        <h2 class="text-xl md:text-2xl font-semibold mb-6 md:mb-12 lg:mb-14">Capabilities & Use Cases</h2>
+        <div class="bg-gradient-to-b from-[#181818] to-[#010101] p-6 rounded-2xl space-y-4 shadow-md">
+          <div class="flex items-start gap-4">
+            <span
+              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">01</span>
+            <p class="text-white border-b border-gray-600 w-full pb-4">Capabilities & Use Cases</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span
+              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">02</span>
+            <p class="text-white border-b border-gray-600 w-full pb-4">Technical Workforce Training & Assistance in AR
+            </p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span
+              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">03</span>
+            <p class="text-white border-b border-gray-600 w-full pb-4">AI-Driven Map Scanning & Smart Routing</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span
+              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">04</span>
+            <p class="text-white">AR Sign Readers for Specially-Abled Navigation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- DIVIDER IMAGE -- 2 -->
+
+  <section class="pb-16 sm:pb-24">
+    <div class="w-[100%] flex justify-center items-center">
+      <img src="./images/specs.png" alt="Specs" class="rounded-lg h-auto">
+    </div>
+  </section>
+
+
+
+  <!-- ALPHABUDDY SECTION -->
+
+  <div id="alphaBuddySection" class=" border-b border-[#191919] pb-16 md:pb-24">
+    <section class="mainContainer px-4 sm:px-6 lg:px-12">
+      <!-- Heading -->
+      <div class="mb-10 md:mb-16 flex flex-col items-start justify-center">
+        <h4 class="text-gray-300 text-lg sm:text-xl font-medium mb-4">Alphabuddy AR</h4>
+        <h1 class="text-3xl md:text-4xl font-semibold mb-4 leading-tight">Revolutionizing Learning Through AR</h1>
+        <p class="text-gray-400 text-lg sm:text-xl max-w-2xl text-left">
+          AlphaBuddy is your intelligent AR navigation companion, designed to simplify movement through complex
+          environments.
+        </p>
+      </div>
+
+      <!-- Applications & Benefits -->
+      <div class="flex flex-col md:flex-row gap-10 w-full justify-between">
+
+        <!-- Applications -->
+        <div class="md:w-[50%] w-[100%] flex justify-start">
+          <div class="flex flex-col">
+            <h2 class="text-xl md:text-2xl text-left font-semibold mb-1 md:mb-6">Applications</h2>
+            <!-- Single App Item -->
+
+
+            <div>
+              <div class="flex items-center gap-2 justify-center">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/book-visual-icon.svg" alt="Outlets" class="" />
+                  <p class="text-base text-gray-300 -mt-3">Book <br> visualization</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/kids-book-icon.svg" alt="University" class="" />
+                  <p class="text-base text-gray-300 -mt-3">Kids <br> book</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/undrsnt-novel-icon.svg" alt="Business" class="" />
+                  <p class="text-base text-gray-300 -mt-3">Conceptual Tools <br> for Complex Math</p>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="md:w-[50%] w-[100%] max-w-[500px]">
+          <h2 class="text-xl md:text-2xl font-semibold text-left mb-6 md:mb-12 lg:mb-14">Capabilities & Use Cases</h2>
+          <div class="bg-gradient-to-b from-[#181818] to-[#010101] p-6 rounded-2xl space-y-4 shadow-md">
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">01</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">Advanced Math Topography Models</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">02</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">Physics & Biology Concept Visualizers</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">03</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">AR Teaching Companion for Educators</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">04</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">Generative 3D Learning Models (future VR
+                compatibility)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- AR SOLUTIONS SECTION -->
+
+  <section id="arSolutions" class="py-16 md:py-24 text-white bg-black">
+    <div class="mainContainer mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-start lg:items-center">
+      <div class="flex flex-col items-start lg:items-center text-left lg:text-center">
+        <p class="text-lg sm:text-xl text-gray-400 mb-4">
+          AR Operational Solutions
+        </p>
+        <h2 class="text-3xl md:text-4xl font-semibold leading-tight mb-8 lg:mb-4">
+          Toolkit for Enterprise Performance, Built with Spatial <br class="hidden md:block" />
+          Computing at its Core
+        </h2>
+      </div>
+
+      <!-- Left Content -->
+
+      <div class="flex flex-col lg:flex-row items-center justify-center w-full">
+        <ul class="space-y-4 w-full lg:w-1/2">
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            Create, Deploy & Monitor Spatial AR Workflows
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            Modular AR Builder for Maintenance, Training & Navigation
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            Visual Scheduling Interface for Spatial Deployment
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            Real-Time AR Experience Analytics Dashboard
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            Role-Based AR Access Management
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            Seamless Integration with IoT Devices and ERP Systems
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1">
+              <img src="./images/bullet-arrow-icon.svg" alt="">
+            </span>
+            AR Content Management System with Version Control & Cloud Sync
+          </li>
+        </ul>
+
+        <!-- Right Content -->
+        <div class="flex justify-center w-full lg:w-1/2">
+          <img src="./images/opr-solution-img.png" alt="AR Glasses with Mall Labels"
+            class="rounded-xl max-w-full h-auto" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- The Visionaries SECTION -->
+
+  <section id="whoWeAre" class="pb-16 md:pb-24 text-white">
+    <div
+      class="mainContainer mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row gap-6 sm:gap-10 items-center">
+
+      <!-- Left Content -->
+      <div class="flex justify-center w-full lg:w-1/2">
+        <img src="./images/who-we-are-img.png" alt="AR Glasses with Mall Labels" class="rounded-xl max-w-full" />
+      </div>
+
+      <!-- Right Content -->
+      <div class="w-full lg:w-1/2">
+        <h2 class="text-3xl md:text-4xl font-semibold leading-snug mb-4">
+          The Visionaries Behind the <br class="hidden sm:block" />AR Lens
+        </h2>
+        <p class="mb-6 text-gray-400">
+          ARoundU delivers enterprise-grade AR solutions that optimize indoor operations and customer experiences—and
+          we're just getting started. Our flagship SpatialNav™ platform provides hands-free, real-time wayfinding for
+          complex environments—airports, malls, corporate campuses—using advanced spatial anchoring and precision
+          overlays on AR glasses. Designed for scalability and seamless integration, SpatialNav™ reduces operational
+          costs, enhances visitor satisfaction, and delivers actionable analytics to facility managers.
+        </p>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1"><img src="./images/bullet-arrow-icon.svg"
+                alt=""></span>
+            Beyond navigation, ARoundU's modular XR toolkit empowers businesses to
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1"><img src="./images/bullet-arrow-icon.svg"
+                alt=""></span>
+            Visualize Data: Overlay real-time metrics on factory floors or retail spaces.
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1"><img src="./images/bullet-arrow-icon.svg"
+                alt=""></span>
+            Train & Educate: Create immersive, hands-free AR tutorials for employees and students.
+          </li>
+          <li class="flex items-start gap-2 font-semibold">
+            <span class="w-4 flex justify-center items-center pt-2 sm:pt-1"><img src="./images/bullet-arrow-icon.svg"
+                alt=""></span>
+            Engage Customers: Develop branded AR experiences for marketing, events, or loyalty programs.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Last second section -->
+  <section id="arTransformation" class="text-center px-4 md:px-20 py-2 pb-6 md:pb-10 relative ">
+    <div
+      class="relative mt-8 flex justify-center items-center bg-gradient-to-b from-gray-900 to-black rounded-2xl py-10">
+      <!-- Floating Images Left -->
+      <img src="./images/Group(31).png"
+        class="hidden sm:block absolute left-4 xl:left-64 -bottom-4 w-12 md:w-20 h-12 md:h-20" />
+      <img src="./images/Group(32).png" class="absolute -left-10 -top-4 w-18 h-18 transform translate-y-1/2 " />
+
+      <!-- Hero text Centered -->
+      <div>
+        <h1 class="text-4xl md:text-6xl font-semibold text-4xl md:text-5xl lg:text-6xl">
+          <p class="leading-[3rem] md:leading-[3.8rem] lg:leading-[4.5rem]">
+            Your AR Transformation
+            <br /> <span class="bg-clip-text text-transparent  bg-gradient-to-b from-gray-500 to-black">Starts
+              Here</span>
+          </p>
+        </h1>
+        <p class="text-white mt-4 max-w-2xl mx-auto text-lg sm:text-xl">
+          Let’s build the spatial future of your business. Whether it’s navigation, training, or a brand-new
+          AR
+          experience—we’re ready.
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex gap-4 justify-center mt-6">
+          <!-- Invite Link Button -->
+          <button class="text-white font-medium px-3 sm:px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+            Request a demo
+          </button>
+
+          <!-- Call Setup Button -->
+          <button class="text-white font-medium px-3 sm:px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+            Partner with us
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Floating Images Right -->
+      <img src="./images/Group(30).png"
+        class="absolute right-0 sm:right-4 top-14 sm:top-12 w-16 h-16 sm:w-18 sm:h-18 md:w-24 md:h-24 transform translate-y-1/2" />
+    </div>
+
+
+
+  </section>
+
+
+  <!-- FOOTER SECTION -->
+
+  <footer class="bg-black py-10">
+    <div class="w-full mx-auto text-center">
+
+      <!-- Logo -->
+      <div class="flex justify-center items-center mb-4">
+        <img src="./images/arvr-footer-logo.svg" alt="Logo" class="">
+      </div>
+
+      <!-- Nav + Social (Responsive Wrapper) -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-center border-t border-b border-gray-600 mb-4 py-8 space-y-4 md:space-y-0">
+
+        <!-- Nav Links -->
+        <!-- Update Footer Navigation -->
+        <div class="flex flex-wrap justify-center md:justify-start space-x-4 text-base text-white pl-0 md:pl-20">
+          <a href="#heroSection" class="font-semibold hover:text-blue-600 nav-link" data-section="heroSection">Home</a>
+          <a href="#whoWeAre" class="font-semibold hover:text-blue-600 nav-link"
+            data-section="whoWeAre">About Us</a>
+          <a href="#vision" class="font-semibold hover:text-blue-600 nav-link" data-section="vision">Vision</a>
+          <a href="#arTransformation" class="font-semibold hover:text-blue-600 nav-link"
+            data-section="arTransformation">Contact Us</a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex justify-center space-x-4 pr-0 md:pr-20">
+          <a href="#" class="rounded-full px-2.5 py-1 text-white bg-blue-600 hover:bg-blue-800"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="#" class="rounded-full px-2.5 py-1 text-white bg-blue-600 hover:bg-blue-800"><i
+              class="fab fa-instagram"></i></a>
+          <a href="#" class="rounded-full px-2.5 py-1 text-white bg-blue-600 hover:bg-blue-800"><i
+              class="fab fa-twitter"></i></a>
+          <a href="#" class="rounded-full px-2.5 py-1 text-white bg-blue-600 hover:bg-blue-800"><i
+              class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <p class="text-sm text-gray-500">
+        © Copyright 2025. Arvexa.ai. All Rights Reserved |
+        <a href="#" class="hover:underline">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>

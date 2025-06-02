@@ -1,0 +1,117 @@
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navigation link styles */
+.nav-link {
+  transition: all 0.3s ease;
+}
+
+/* Active link styles for desktop */
+.nav-link.active {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Active state for contact button */
+button.nav-link.active {
+  background: white !important;
+  color: black !important;
+  border-color: white !important;
+}
+
+/* Mobile menu active link */
+#mobile-menu .nav-link.active {
+  color: white !important;
+  font-weight: 500 !important;
+  border-left: 4px solid #3b82f6 !important;
+  padding-left: 1rem !important;
+}
+
+/* Section spacing */
+section {
+  scroll-margin-top: 100px;
+}
+
+/* Mobile menu transitions */
+#mobile-menu {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Footer link hover states */
+footer .nav-link:hover {
+  color: #3b82f6 !important;
+}
+
+
+.font_urbanist {
+  font-family: "Urbanist", sans-serif;
+}
+
+.arrow-icon {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .arrow-icon {
+  opacity: 1;
+}
+
+/* Prevent scrolling when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Smooth transitions for mobile menu */
+.mobile-menu {
+  transition: transform 0.3s ease-in-out;
+}
+
+.mainContainer {
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+@media (max-width: 514px) {
+  .cardss {
+    margin-top: -250px;
+  }
+}
+@media (max-width: 460px) {
+  .cardss {
+    margin-top: -200px;
+  }
+}
+
+
+/* style.css */
+/* Desktop dropdown styles */
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.group:hover .group-hover\:visible {
+  visibility: visible;
+}
+
+/* Mobile dropdown styles */
+.mobile-dropdown-content {
+  transition: all 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.mobile-dropdown.active .mobile-dropdown-content {
+  display: block;
+  max-height: 500px; /* Adjust based on content */
+}
+
+.mobile-dropdown.active svg {
+  transform: rotate(180deg);
+}
+
+
+#alphaBuddySection{
+  scroll-margin-top: 100px;
+}
