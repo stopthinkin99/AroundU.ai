@@ -29,6 +29,12 @@
     const navLinks = document.querySelectorAll('a');
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+
+        if (href && href.startsWith('http')) {
+          return;
+        }
+
         e.preventDefault();
 
         // Remove active class from all links

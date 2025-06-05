@@ -5,11 +5,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AroundU</title>
+  <link rel="shortcut icon" href="./images/aroundUfacIcon.svg" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" href="./images/aroundu-favicon.png" type="image/png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Swiper JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+
+
+  <style>
+    /* Custom CSS */
+    .hero-slide {
+      position: relative;
+      height: 80vh;
+      max-height: 520px;
+      width: 100%;
+    }
+
+    .hero-slide-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .slide-content-container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      width: 100%;
+    }
+
+    .text-content {
+      width: 59%;
+      padding-left: 10%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+
+    .text-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0.6) 30%,
+          rgba(0, 0, 0, 0.4) 60%,
+          rgba(0, 0, 0, 0.2) 85%,
+          rgba(0, 0, 0, 0) 100%);
+      z-index: -1;
+    }
+
+    .text-content-sld-5::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          rgba(0, 0, 0, 0.8) 20%,
+          rgba(0, 0, 0, 0.6) 85%,
+          rgba(0, 0, 0, 0.4) 90%,
+          rgba(0, 0, 0, 0.2) 95%,
+          rgba(0, 0, 0, 0) 100%);
+      z-index: -1;
+    }
+
+
+    .empty-div {
+      width: 41%;
+    }
+
+    /* Ensure swiper container takes full height */
+    .swiper {
+      height: 100%;
+    }
+
+    /* Static cards container */
+    .static-cards-container {
+      position: absolute;
+      bottom: 40px;
+      left: 0;
+      right: 0;
+      z-index: 49;
+    }
+
+  </style>
+
+
 </head>
 
 <body class="bg-black text-white font_urbanist">
@@ -21,8 +117,7 @@
       <div class="flex items-center w-28 sm:w-40 font-semibold">
         <img src="./images/arvr-nav-logo.svg" alt="AroundU Logo">
       </div>
-
-
+        
       <!-- Update Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
         <a href="#heroSection" class="text-white font-medium nav-link" data-section="heroSection">Home</a>
@@ -41,8 +136,7 @@
             <a href="#SpatialNav" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 nav-link"
               onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })">SpatialNav</a>
             <a href="#Alphabuddy" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800 nav-link"
-                     onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
->Alphabuddy</a>
+              onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })">Alphabuddy</a>
           </div>
         </div>
 
@@ -75,7 +169,7 @@
 
           <!-- Logo -->
           <div class="flex items-center w-28 sm:w-40 font-semibold">
-            <img src="./images/arvr-nav-logo.svg" alt="AroundU Logo">
+            <img src="./images/AR-VR-logo.svg" alt="AroundU Logo">
           </div>
 
           <button id="close-menu" class="text-white focus:outline-none">
@@ -107,8 +201,7 @@
               <a href="#SpatialNav" class="block py-2 text-gray-400 hover:text-white nav-link"
                 onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })">SpatialNav</a>
               <a href="#Alphabuddy" class="block py-2 text-gray-400 hover:text-white nav-link"
-                       onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
->Alphabuddy</a>
+                onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })">Alphabuddy</a>
             </div>
           </div>
 
@@ -128,110 +221,225 @@
 
   <!-- HERO SECTION -->
 
-  <section id="heroSection"
-    class="text-center px-4 md:px-20 pt-2 sm:pt-10 relative bg-cover bg-center border-b border-[#191919] pb-16 md:pb-24"
-    style="background-image: url('./images/Ellipse.png');">
-    <div class="relative mt-8 flex justify-center items-center">
-      <!-- Floating Images Left -->
-      <img src="./images/Group(31).png"
-        class="hidden sm:block absolute left-4 xl:left-64 -bottom-4 w-12 md:w-20 h-12 md:h-20" />
-      <img src="./images/Group(32).png" class="absolute -left-10 -top-4 w-18 h-18 transform translate-y-1/2 " />
+  <section id="heroSection" class="bg-black text-white pb-[380px] md:pb-[200px] lg:pb-32">
+    <div class="max-w-full mx-auto relative" style="height: 80vh; max-height: 520px;">
+      <!-- Custom Prev Button -->
+      <button
+        class="hidden md:block custom-prev absolute right-10 top-[200px] transform -translate-y-1/2 z-20 bg-white text-[#1824e4] h-[45px] w-[45px] rounded-full cursor-pointer hover:bg-[#1824e4] hover:text-white transition-all duration-300">
+        <i class="fas fa-arrow-left"></i>
+      </button>
 
-      <!-- Hero text Centered -->
-      <div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold">
-          <p class="leading-[3rem] md:leading-[3.5rem] lg:leading-[4.5rem]">Next-Gen <span
-              style="background-image: linear-gradient(to right, #1681e6, #902dff);"
-              class="bg-clip-text text-transparent">Augmented</span> Reality<br class="hidden lg:block" />
-            for Real-World Impact</p>
-        </h1>
-        <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg sm:text-xl">
-          Experience the future with next-gen Augmented Reality built to solve real-world challenges and drive
-          meaningful change.
-        </p>
+      <!-- Swiper Container -->
+      <div class="swiper mySwiper h-full">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 - Book Visualization -->
+          <div class="swiper-slide">
+            <div class="hero-slide">
+              <div class="hero-slide-bg max-h-[520px]"
+                style="background-image: url('./images/hero-sld-1-img.png'); background-position: left; background-size: cover;">
+              </div>
+              <div class="slide-content-container">
+                <div class="text-content w-[90%] md:w-[90%] lg:w-[45%]">
+                  <h2
+                    class="hero-sldr-head poppins-semibold text-2xl md:text-4xl lg:text-5xl mb-2 md:mb-4 whitespace-nowrap">
+                    Book visualization
+                  </h2>
+                  <p class="text-base lg:text-lg hero-sldr-subHead">
+                    Augmented Reality (AR) book visualization brings stories and educational content to life
+                    by overlaying interactive 3D models, animations, and sounds onto the pages of a physical
+                    book.
+                  </p>
+                  <!-- Call Setup Button -->
+                  <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2QXedK-dg2-VMPXGE2rkxc8UH5OSdFe8j9oL6yQYFEEXlqXTfDu-Kd3_5P7dWN2ZwmM8luxNWU" 
+                     target="_blank"
+                     class="text-white max-w-[140px] mt-2 mb-12 sm:mb-0 font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                            bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                            hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+                    Call Setup
+                  </a>
+                </div>
+                <div class="empty-div w-[0%] md:w-[55%]"></div>
+              </div>
+            </div>
+          </div>
 
-        <!-- Buttons -->
-        <div class="flex gap-4 justify-center mt-6">
-          <!-- Invite Link Button -->
-          <button class="text-white font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
-                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
-                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
-            Invite Link
-          </button>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="hero-slide">
+              <div class="hero-slide-bg max-h-[520px]"
+                style="background-image: url('./images/hero-sld-2-img.png'); background-position: left; background-size: cover;">
+              </div>
+              <div class="slide-content-container">
+                <div class="text-content w-[90%] sm:w-[80%] md:w-[60%] lg:w-[45%]">
+                  <h2 class="hero-sldr-head poppins-semibold text-2xl md:text-4xl lg:text-5xl mb-2 md:mb-4">
+                    Kids book
+                  </h2>
+                  <p class="text-base lg:text-lg hero-sldr-subHead">
+                    AR/VR in kids’ books transforms reading into an immersive adventure by adding interactive
+                    characters, colorful animations, and sound effects that respond to page turns and touch.
+                  </p>
+                    <!-- Call Setup Button -->
+                  <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2QXedK-dg2-VMPXGE2rkxc8UH5OSdFe8j9oL6yQYFEEXlqXTfDu-Kd3_5P7dWN2ZwmM8luxNWU" 
+                     target="_blank"
+                     class="text-white max-w-[140px] mt-2 mb-12 sm:mb-0 font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                            bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                            hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+                    Call Setup
+                  </a>
+                </div>
+                <div class="empty-div w-[40%] lg:w-[55%] hidden sm:block"></div>
+              </div>
+            </div>
+          </div>
 
-          <!-- Call Setup Button -->
-          <button class="text-white font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
-                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
-                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
-            Call Setup
-          </button>
-        </div>
-
-      </div>
-
-      <!-- Floating Images Right -->
-      <img src="./images/Group(30).png"
-        class="absolute right-0 sm:right-4 top-14 sm:top-12 w-16 h-16 sm:w-18 sm:h-18 md:w-24 md:h-24 transform translate-y-1/2" />
-    </div>
-
-
-    <!-- Hero Image with small side images -->
-    <div class="relative mt-8 flex justify-center items-center">
-
-      <!-- Hero Image Centered -->
-      <div class="bg-black p-4 rounded-xl shadow-lg z-10 ">
-        <img src="./images/herobgg.png" alt="Hero" class="mx-auto w-full mb-12 sm:mb-0" />
-      </div>
-
-
-    </div>
-
-    <!-- Cards -->
-    <div class="cardss -mt-64 sm:-mt-48 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto relative z-10">
-      <!-- Card 1 -->
-      <div
-      onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })"
-        class="card cursor-pointer bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 shadow-lg flex flex-col gap-4 transition">
-        <div class="flex justify-between items-center w-full">
-          <img src="./images/sp.png" class="w-10" />
-          <div class="bg-blue-500 p-2 rounded-full arrow-icon">
-            <img src="./images/arw.png" class="h-6 w-6" alt="">
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="hero-slide">
+              <div class="hero-slide-bg max-h-[520px]"
+                style="background-image: url('./images/hero-sld-3-img.png'); background-position: left; background-size: cover;">
+              </div>
+              <div class="slide-content-container">
+                <div class="text-content w-[80%] sm:w-[70%] md:w-[50%] lg:w-[40%]">
+                  <h2 class="hero-sldr-head poppins-semibold text-2xl md:text-4xl lg:text-5xl mb-2 md:mb-4">
+                    Outlets, Malls
+                  </h2>
+                  <p class="text-base lg:text-lg hero-sldr-subHead">
+                    AR/VR in outlets and malls enhances shopping experiences by guiding customers through virtual maps,
+                    enabling product try-ons, and offering interactive promotions and entertainment.
+                  </p>
+                    <!-- Call Setup Button -->
+                  <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2QXedK-dg2-VMPXGE2rkxc8UH5OSdFe8j9oL6yQYFEEXlqXTfDu-Kd3_5P7dWN2ZwmM8luxNWU" 
+                     target="_blank"
+                     class="text-white max-w-[140px] mt-2 mb-12 sm:mb-0 font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                            bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                            hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+                    Call Setup
+                  </a>
+                </div>
+                <div class="empty-div w-[20%] sm:w-[30%] md:w-[50%] lg:w-[60%]"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="swiper-slide">
+            <div class="hero-slide">
+              <div class="hero-slide-bg max-h-[520px]"
+                style="background-image: url('./images/hero-sld-4-img.png'); background-position: left; background-size: cover;">
+              </div>
+              <div class="slide-content-container">
+                <div class="text-content w-[90%] sm:w-[80%] md:w-[65%] lg:w-[55%] xl:w-[45%]">
+                  <h2 class="hero-sldr-head poppins-semibold text-2xl md:text-4xl lg:text-5xl mb-2 md:mb-4">
+                    Games
+                  </h2>
+                  <p class="text-base lg:text-lg hero-sldr-subHead">
+                    AR/VR in gaming creates immersive play environments by merging digital characters, environments, and
+                    effects with real-world settings for more interactive and engaging experiences.
+                  </p>
+                    <!-- Call Setup Button -->
+                  <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2QXedK-dg2-VMPXGE2rkxc8UH5OSdFe8j9oL6yQYFEEXlqXTfDu-Kd3_5P7dWN2ZwmM8luxNWU" 
+                     target="_blank"
+                     class="text-white max-w-[140px] mt-2 mb-12 sm:mb-0 font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                            bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                            hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+                    Call Setup
+                  </a>
+                </div>
+                <div class="empty-div w-[10%] sm:w-[20%] md:w-[35%] lg:w-[45%] xl:w-[55%]"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="swiper-slide">
+            <div class="hero-slide">
+              <div class="hero-slide-bg max-h-[520px]"
+                style="background-image: url('./images/hero-sld-5-img.png'); background-position: left; background-size: cover;">
+              </div>
+              <div class="slide-content-container">
+                <div class="text-content text-content-sld-5 w-[90%] sm:w-[65%] md:w-[50%] lg:w-[45%]">
+                  <h2 class="hero-sldr-head poppins-semibold text-2xl md:text-4xl lg:text-5xl mb-2 md:mb-4">
+                    Industrial or Manufacturing
+                  </h2>
+                  <p class="text-base lg:text-lg hero-sldr-subHead">
+                    AR/VR in industrial or manufacturing sectors improves training, maintenance, and design by
+                    visualizing complex machinery through 3D overlays and real-time data simulations.
+                  </p>
+                    <!-- Call Setup Button -->
+                  <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2QXedK-dg2-VMPXGE2rkxc8UH5OSdFe8j9oL6yQYFEEXlqXTfDu-Kd3_5P7dWN2ZwmM8luxNWU" 
+                     target="_blank"
+                     class="text-white max-w-[140px] mt-2 mb-12 sm:mb-0 font-medium px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                            bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                            hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+                    Call Setup
+                  </a>
+                </div>
+                <div class="empty-div w-[10%] sm:w-[35%] md:w-[50%] lg:w-[55%]"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-left">SpatialNav<sup>TM <span
-                class="border border-[#364ccf] py-1.5 px-2 rounded-full ml-1.5 font-thin bg-[#26285b]">Built in
-                collaboration with Snap AR</span></sup></h3>
-          <p class="text-sm text-gray-300 mt-2 text-left">
-            Navigate complex spaces with ease. AR-powered spatial navigation overlays real-time directions,
-            landmarks,
-            and contextual cues into your environment.
-          </p>
-        </div>
+
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination mb-12 block md:hidden"></div>
       </div>
 
-      <!-- Card 2 -->
-      <div
-             onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
+      <!-- Static Cards Container -->
+      <div class="static-cards-container absolute bottom-[-380px] md:bottom-[-210px] lg:bottom-[-150px]">
+        <div class="flex justify-center w-full px-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
+            <!-- Card 1 -->
+            <div onclick="document.getElementById('spatialNavSection').scrollIntoView({ behavior: 'smooth' })"
+              class="card cursor-pointer bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 shadow-lg flex flex-col gap-4 transition">
+              <div class="flex justify-between items-center w-full">
+                <img src="./images/sp.png" class="w-10" />
+                <div class="bg-blue-500 p-2 rounded-full arrow-icon">
+                  <img src="./images/arw.png" class="h-6 w-6" alt="">
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-left flex flex-col items-start lg:flex-row gap-1.5 lg:gap-3">
+                  <span>SpatialNav<sup>TM</sup></span> <span
+                    class="border border-[#364ccf] py-1.5 px-2 rounded-full font-thin text-sm bg-[#26285b] whitespace-nowrap">Built
+                    in
+                    collaboration with Snap AR</span>
+                </h3>
+                <p class="text-sm text-gray-300 mt-2 text-left">
+                  Navigate complex spaces with ease. AR-powered spatial navigation overlays real-time directions,
+                  landmarks,
+                  and contextual cues into your environment.
+                </p>
+              </div>
+            </div>
 
-        class="card cursor-pointer bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 shadow-lg flex flex-col gap-4 transition">
-        <div class="flex justify-between items-center w-full">
-          <img src="./images/alpha.png" class="w-10" />
-          <div class="bg-blue-500 p-2 rounded-full arrow-icon">
-            <img src="./images/arw.png" class="h-6 w-6" alt="">
+            <!-- Card 2 -->
+            <div onclick="document.getElementById('alphaBuddySection').scrollIntoView({ behavior: 'smooth' })"
+              class="card cursor-pointer bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/10 shadow-lg flex flex-col gap-4 transition">
+              <div class="flex justify-between items-center w-full">
+                <img src="./images/alpha.png" class="w-10" />
+                <div class="bg-blue-500 p-2 rounded-full arrow-icon">
+                  <img src="./images/arw.png" class="h-6 w-6" alt="">
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-left">Alphabuddy</h3>
+                <p class="text-sm text-gray-300 mt-2 text-left">
+                  Let Alpha Buddy guide you. With real-time AR overlays, effortlessly find your way through malls,
+                  campuses,
+                  airports, or offices. Smart, intuitive, and always one step ahead.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-left">Alphabuddy</h3>
-          <p class="text-sm text-gray-300 mt-2 text-left">
-            Let Alpha Buddy guide you. With real-time AR overlays, effortlessly find your way through malls,
-            campuses,
-            airports, or offices. Smart, intuitive, and always one step ahead.
-          </p>
-        </div>
       </div>
+
+      <!-- Custom Next Button -->
+      <button
+        class="hidden md:block custom-next absolute right-10 top-1/2 transform -translate-y-1/2 z-20  bg-white text-[#1824e4] h-[45px] w-[45px] rounded-full cursor-pointer hover:bg-[#1824e4] hover:text-white transition-all duration-300">
+        <i class="fas fa-arrow-right"></i>
+      </button>
     </div>
   </section>
+
 
 
   <!-- OUR VISION SECTION -->
@@ -309,92 +517,179 @@
 
 
 
+  <!-- KEY CHALLENGES SECTION -->
+
+  <div class="mainContainer min-h-screen px-6 md:px-20 pb-16 md:pb-24 flex flex-col xl:flex-row gap-10">
+
+    <!-- LEFT CONTENT -->
+    <div class="w-full xl:w-1/2">
+      <p class="text-gray-400 text-lg sm:text-xl font-medium mb-4">challenges</p>
+      <h1 class="text-3xl md:text-4xl font-semibold mb-8 leading-tight">KEY Challenges Faced by End Users</h1>
+
+      <div class="space-y-10 text-sm md:text-base">
+
+        <!-- Each challenge item -->
+        <div class="flex items-start gap-4">
+          <img src="./images/bullet-arrow-icon.svg" alt="" class="mt-1 w-4 h-4" />
+          <div>
+            <p class="font-bold text-white">Overall Delay in finding final destination</p>
+            <p class="text-gray-300 mt-2 leading-relaxed">
+              There is a considerable delay faced by end user in finding the final office, library, Outlet stores,
+              F&amp;B.
+              For instance in Mall consumers find it difficult to locate their preferred cloth outlets, footwear,
+              F&amp;B and various other outlets, hence they have to walk a lot.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <img src="./images/bullet-arrow-icon.svg" alt="" class="mt-1 w-4 h-4" />
+          <div>
+            <p class="font-bold text-white">Personalization:</p>
+            <p class="text-gray-300 mt-2 leading-relaxed">
+              Most consumers today need personalized experience and expectations across various airports, malls,
+              concerts, universities.
+              Contrary everything is general and not aligned with User Personalization concept.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <img src="./images/bullet-arrow-icon.svg" alt="" class="mt-1 w-4 h-4" />
+          <div>
+            <p class="font-bold text-white">Ease and Simplicity</p>
+            <p class="text-gray-300 mt-2 leading-relaxed">
+              Every consumer wants expected output with a single click of button to provide them desired output in
+              seconds.
+              Again most of the signboards support local language and hence for foreign consumers there is no language
+              translation.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <img src="./images/bullet-arrow-icon.svg" alt="" class="mt-1 w-4 h-4" />
+          <div>
+            <p class="font-bold text-white">Lack of awareness</p>
+            <p class="text-gray-300 mt-2 leading-relaxed">
+              Most of the consumers are across varied age groups and may not have required skills to navigate their
+              destination using mobile apps or sign boards.
+              Communication becomes another hurdle for them.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <img src="./images/bullet-arrow-icon.svg" alt="" class="mt-1 w-4 h-4" />
+          <div>
+            <p class="font-bold text-white">Real-Time Assistance</p>
+            <p class="text-gray-300 mt-2 leading-relaxed">
+              Consumers don’t get real time assistance on mapping exactly with what they need,
+              and that leads to their growing frustration, delay and lack of support.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="w-full xl:w-1/2 flex justify-center items-start">
+      <img src="./images/key-chalange-img.png" alt="AR Glasses" class="w-full max-w-xl rounded-lg shadow-2xl" />
+    </div>
+
+  </div>
+
+
+
 
   <!-- SPATIAL NAV SECTION -->
 
-  <section id="spatialNavSection" class="mainContainer px-4 sm:px-6 lg:px-12 pb-16 md:pb-24">
-    <!-- Heading -->
-    <div class="mb-10 md:mb-16">
-      <h4 class="text-gray-300 text-lg sm:text-xl font-medium mb-4">SpatialNav<sup>TM</sup></h4>
-      <h1 class="text-3xl md:text-4xl font-semibold mb-4 leading-tight">Built in collaboration with Snap AR</h1>
-      <p class="text-gray-400 text-lg sm:text-xl max-w-2xl">
-        Navigation for Indoor Spaces Using AR
-      </p>
-    </div>
+  <!-- SPATIAL NAV SECTION WRAPPER -->
+  <div class="relative overflow-hidden">
+    <!-- BACKGROUND IMAGE -->
+    <img src="./images/spitalnav-bg.png" alt="Background"
+      class="absolute top-[-60px] left-0 w-full object-cover z-0 pointer-events-none select-none" />
 
-    <!-- Applications & Benefits -->
-    <div class="flex flex-col md:flex-row gap-10 w-full justify-between">
-
-      <!-- Applications -->
-      <div class="md:w-[50%] w-[100%]">
-        <div class="flex flex-col items-start">
-          <h2 class="text-xl md:text-2xl font-semibold mb-1 md:mb-6">Applications</h2>
-          <!-- Single App Item -->
-
-
-          <div>
-            <div class="flex items-center gap-2 justify-center">
-              <div class="flex flex-col items-center text-center">
-                <img src="./images/outlet-mall-icon.svg" alt="Outlets" class="" />
-                <p class="text-base text-gray-300 -mt-3">Outlets, <br> Malls</p>
-              </div>
-              <div class="flex flex-col items-center text-center">
-                <img src="./images/unvrst-icon.svg" alt="University" class="" />
-                <p class="text-base text-gray-300 -mt-3">University Campuses & <br> Academic Institutions</p>
-              </div>
-              <div class="flex flex-col items-center text-center">
-                <img src="./images/business-park-icon.svg" alt="Business" class="" />
-                <p class="text-base text-gray-300 -mt-3">Business Parks & <br> Enterprise Offices</p>
-              </div>
-            </div>
-
-
-            <div class="flex items-center gap-2 justify-center">
-              <div class="flex flex-col items-center text-center">
-                <img src="./images/airports-icon.svg" alt="Airports" class="" />
-                <p class="text-base text-gray-300 -mt-3">Airports, <br>Transport Hubs</p>
-              </div>
-              <div class="flex flex-col items-center text-center">
-                <img src="./images/Museums-Exhibitions-icon.svg" alt="Museums" class="" />
-                <p class="text-base text-gray-300 -mt-3">Museums, Art <br> Galleries & Exhibitions</p>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
+    <!-- SPATIAL NAV SECTION -->
+    <section id="spatialNavSection"
+      class="mainContainer relative z-10 px-4 sm:px-6 lg:px-12 pb-16 md:pb-24 pt-24 md:pt-32">
+      <!-- Heading -->
+      <div class="mb-10 md:mb-16">
+        <h4 class="text-gray-400 text-lg sm:text-xl font-medium mb-4">SpatialNav<sup>TM</sup></h4>
+        <h1 class="text-3xl md:text-4xl font-semibold mb-4 leading-tight">Built in collaboration with Snap AR</h1>
+        <p class="text-gray-400 text-lg sm:text-xl max-w-2xl">
+          Navigation for Indoor Spaces Using AR
+        </p>
       </div>
 
-      <!-- Benefits -->
-      <div class="md:w-[50%] w-[100%] max-w-[500px]">
-        <h2 class="text-xl md:text-2xl font-semibold mb-6 md:mb-12 lg:mb-14">Capabilities & Use Cases</h2>
-        <div class="bg-gradient-to-b from-[#181818] to-[#010101] p-6 rounded-2xl space-y-4 shadow-md">
-          <div class="flex items-start gap-4">
-            <span
-              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">01</span>
-            <p class="text-white border-b border-gray-600 w-full pb-4">Capabilities & Use Cases</p>
+      <!-- Applications & Benefits -->
+      <div class="flex flex-col md:flex-row gap-10 w-full justify-between">
+        <!-- Applications -->
+        <div class="md:w-[50%] w-full">
+          <div class="flex flex-col items-start">
+            <h2 class="text-xl md:text-2xl font-semibold mb-1 md:mb-6">Applications</h2>
+            <div>
+              <!-- Row 1 -->
+              <div class="flex items-start gap-2 justify-center">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/outlet-mall-icon.svg" alt="Outlets" />
+                  <p class="text-base text-gray-300 -mt-3">Outlets, <br> Malls</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/unvrst-icon.svg" alt="University" />
+                  <p class="text-base text-gray-300 -mt-3">University Campuses & <br /> Academic Institutions</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/business-park-icon.svg" alt="Business" />
+                  <p class="text-base text-gray-300 -mt-3">Business Parks & <br> Enterprise Offices</p>
+                </div>
+              </div>
+              <!-- Row 2 -->
+              <div class="flex items-start gap-2 justify-center">
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/airports-icon.svg" alt="Airports" />
+                  <p class="text-base text-gray-300 -mt-3">Airports, <br>Transport Hubs</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <img src="./images/Museums-Exhibitions-icon.svg" alt="Museums" />
+                  <p class="text-base text-gray-300 -mt-3">Museums, Art <br> Galleries & Exhibitions</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="flex items-start gap-4">
-            <span
-              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">02</span>
-            <p class="text-white border-b border-gray-600 w-full pb-4">Technical Workforce Training & Assistance in AR
-            </p>
-          </div>
-          <div class="flex items-start gap-4">
-            <span
-              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">03</span>
-            <p class="text-white border-b border-gray-600 w-full pb-4">AI-Driven Map Scanning & Smart Routing</p>
-          </div>
-          <div class="flex items-start gap-4">
-            <span
-              class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">04</span>
-            <p class="text-white">AR Sign Readers for Specially-Abled Navigation</p>
+        </div>
+
+        <!-- Benefits -->
+        <div class="md:w-[50%] w-full max-w-[500px]">
+          <h2 class="text-xl md:text-2xl font-semibold mb-6 md:mb-12 lg:mb-14">Capabilities & Use Cases</h2>
+          <div class="bg-gradient-to-b from-[#1d1f32] to-[#010101] p-6 rounded-2xl space-y-4 shadow-md">
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">01</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">Capabilities & Use Cases</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">02</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">Technical Workforce Training & Assistance in AR
+              </p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">03</span>
+              <p class="text-white border-b border-gray-600 w-full pb-4">AI-Driven Map Scanning & Smart Routing</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span
+                class="bg-white text-black rounded-full w-[28px] h-[28px] flex items-center justify-center text-sm font-semibold">04</span>
+              <p class="text-white">AR Sign Readers for Specially-Abled Navigation</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
+    </section>
+  </div>
 
 
   <!-- DIVIDER IMAGE -- 2 -->
@@ -432,7 +727,7 @@
 
 
             <div>
-              <div class="flex items-center gap-2 justify-center">
+              <div class="flex items-start gap-2 justify-center">
                 <div class="flex flex-col items-center text-center">
                   <img src="./images/book-visual-icon.svg" alt="Outlets" class="" />
                   <p class="text-base text-gray-300 -mt-3">Book <br> visualization</p>
@@ -608,6 +903,109 @@
   </section>
 
 
+
+
+    <!-- WHY CHOOSE SECTION -->
+
+  <section class="bg-black text-white px-4">
+  <div class="mainContainer mx-auto">
+    <!-- Section Header -->
+    <div class="header">
+        <p>Why choose</p>
+        <h1>Why Augmented Reality is the Smart Choice</h1>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item right-item" data-step="01">
+            <div class="circle blue"><img src="./images/icn1.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Real-Time Translation in View</h2>
+                <p>Get instant subtitles or translations directly in your line of sight—no need for phones or external devices.</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item left-item" data-step="02">
+            <div class="circle yellow"><img src="./images/icn2.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Multi-Language Support</h2>
+                <p>Translate across 100+ global languages and dialects, with support for regional accents and pronunciation nuances.
+</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item right-item" data-step="03">
+            <div class="circle blue"><img src="./images/icn3.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Offline Translation Capabilities</h2>
+                <p>Preload translation models and basic dictionaries for use in low-connectivity or offline environments.
+                </p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item left-item" data-step="04">
+            <div class="circle yellow"><img src="./images/icn4.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>No-Hand, No-Distraction Design</h2>
+                <p>Translates passively—so users can focus on conversations, tasks, or navigation without interruptions or phone use.
+</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item right-item" data-step="05">
+            <div class="circle blue"><img src="./images/icn5.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Easy Setup & Pairing</h2>
+                <p>Get started quickly with minimal configuration—connect to your AR glasses, select your language pair, and go.</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item left-item" data-step="06">
+            <div class="circle yellow"><img src="./images/icn6.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Lead the Future of Communication</h2>
+                <p>With Arvexa.ai smart glasses language translator, your business stands at the frontier of human interaction—bridging worlds through immersive technology.</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item right-item" data-step="07">
+            <div class="circle blue"><img src="./images/icn7.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Intuitive UX for Glasses</h2>
+                <p>We design simple, gesture- or voice-based interfaces that align with smart glass constraints and user expectations.
+</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item left-item" data-step="08">
+            <div class="circle yellow"><img src="./images/icn8.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Battery-Optimized Performance</h2>
+                <p>Our apps are built for efficiency—designed to maximize performance while minimizing energy usage on wearable hardware.</p>
+            </div>
+            <div class="zigzag-line"></div>
+        </div>
+
+        <div class="timeline-item right-item" data-step="09">
+            <div class="circle blue"><img src="./images/icn9.png" alt=""></div>
+            <div class="timeline-content">
+                <h2>Natural Eye-Level Translation</h2>
+                <p>Unlike phone-based apps, translations appear right where you're looking—making interactions feel more human and intuitive.</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+
+
   <!-- Last second section -->
   <section id="arTransformation" class="text-center px-4 md:px-20 py-2 pb-6 md:pb-10 relative ">
     <div
@@ -635,18 +1033,14 @@
         <!-- Buttons -->
         <div class="flex gap-4 justify-center mt-6">
           <!-- Invite Link Button -->
-          <button class="text-white font-medium px-3 sm:px-6 py-2 rounded-full transition duration-300 ease-in-out 
-                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
-                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
-            Request a demo
-          </button>
-
           <!-- Call Setup Button -->
-          <button class="text-white font-medium px-3 sm:px-6 py-2 rounded-full transition duration-300 ease-in-out 
-                 bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
-                 hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSflOQeNS4IUp9pRI3QSBXQTt0LbusXdszHfSoAuNXOrqtihuw/viewform"
+             target="_blank"
+             class="text-white font-medium px-3 sm:px-6 py-2 rounded-full transition duration-300 ease-in-out 
+                    bg-gradient-to-r from-[#2b2b2b] to-[#3c3c3c] hover:from-[#1c1cf3] hover:to-[#5c9bff] 
+                    hover:shadow-[0_0_5px_0_rgba(92,155,255,0.6)]"> 
             Partner with us
-          </button>
+          </a>
         </div>
 
       </div>
@@ -668,7 +1062,7 @@
 
       <!-- Logo -->
       <div class="flex justify-center items-center mb-4">
-        <img src="./images/arvr-footer-logo.svg" alt="Logo" class="">
+        <img src="./images/arvr-nav-logo.svg" alt="Logo" class="w-44">
       </div>
 
       <!-- Nav + Social (Responsive Wrapper) -->
@@ -679,8 +1073,7 @@
         <!-- Update Footer Navigation -->
         <div class="flex flex-wrap justify-center md:justify-start space-x-4 text-base text-white pl-0 md:pl-20">
           <a href="#heroSection" class="font-semibold hover:text-blue-600 nav-link" data-section="heroSection">Home</a>
-          <a href="#whoWeAre" class="font-semibold hover:text-blue-600 nav-link"
-            data-section="whoWeAre">About Us</a>
+          <a href="#whoWeAre" class="font-semibold hover:text-blue-600 nav-link" data-section="whoWeAre">About Us</a>
           <a href="#vision" class="font-semibold hover:text-blue-600 nav-link" data-section="vision">Vision</a>
           <a href="#arTransformation" class="font-semibold hover:text-blue-600 nav-link"
             data-section="arTransformation">Contact Us</a>
@@ -708,6 +1101,53 @@
   </footer>
 
   <script src="./script.js"></script>
+
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize Swiper
+      const swiper = new Swiper('.mySwiper', {
+        // Optional parameters
+        loop: true,
+        speed: 1000,
+        spaceBetween: 0,
+        slidesPerView: 1,
+        autoHeight: false,
+        centeredSlides: true,
+
+        // Navigation arrows
+        navigation: {
+          nextEl: '.custom-next',
+          prevEl: '.custom-prev',
+        },
+
+        // Pagination
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
+        },
+
+        // Autoplay
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: true,
+        },
+
+        // Effect
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+
+        // Modules
+        // modules: [Navigation, Pagination, Autoplay],
+      });
+    });
+  </script>
+
 </body>
 
 </html>
